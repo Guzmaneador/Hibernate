@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-nov-2019 16:11:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="liga" name="Modelo.JugadorDAO.Jugador" optimistic-lock="version" table="jugador">
+    <id name="idJugador" type="java.lang.Integer">
+      <column name="id_jugador"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="Modelo.EquipoDAO.Equipo" fetch="select" name="equipo">
+      <column name="equipo"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="45" name="nombre"/>
+    </property>
+    <property name="apellido" type="string">
+      <column length="45" name="apellido"/>
+    </property>
+    <property name="posicion" type="string">
+      <column length="45" name="posicion"/>
+    </property>
+    <property name="idCapitan" type="java.lang.Integer">
+      <column name="id_capitan"/>
+    </property>
+    <property name="fechaAlta" type="timestamp">
+      <column length="19" name="fecha_alta"/>
+    </property>
+    <property name="salario" type="java.lang.Integer">
+      <column name="salario"/>
+    </property>
+    <property name="altura" type="big_decimal">
+      <column name="altura" precision="4"/>
+    </property>
+  </class>
+</hibernate-mapping>
