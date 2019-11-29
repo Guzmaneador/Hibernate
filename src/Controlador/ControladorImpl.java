@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Modelo;
 import Vista.Vista;
+import java.util.List;
 
 /**
  *
@@ -18,6 +19,10 @@ public class ControladorImpl implements Controlador{
     
     @Override
     public void iniciar(){
+    }
+    
+    public List<Object> CRUDControlado(String accion, String tabla, Object object, String id){
+        return modelo.CRUDModelo(accion,tabla,object,id);
     }
     
 
