@@ -46,8 +46,8 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://192.168.56.101:3306/liga?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">munchi</property>
     <property name="hibernate.connection.password">linux</property>
-    <mapping resource="Modelo/PartidoDAO/Equipo.hbm.xml"/>
+    <mapping resource="Modelo/EquipoDAO/Equipo.hbm.xml"/>
     <mapping resource="Modelo/PartidoDAO/Partido.hbm.xml"/>
-    <mapping resource="Modelo/PartidoDAO/Jugador.hbm.xml"/>
+    <mapping resource="Modelo/JugadorDAO/Jugador.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -1,6 +1,7 @@
 package Modelo;
 
 import Modelo.JugadorDAO.Jugador;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,10 +23,14 @@ public class CRUD {
     
     public CRUD() {
         this.sessionFactori = HibernateUtil.getSessionFactory();
+            resultado = new ArrayList<>() ;
+
     }
     
     public List<Object> analizarAccion(String accion, String tabla, Object object, String id){
-        resultado.clear();
+        if(resultado.size() != 0)
+            resultado.clear();
+        
         session = sessionFactori.openSession();
         this.accion=accion;
         this.tabla=tabla;
@@ -66,9 +71,9 @@ public class CRUD {
     
     private List<Object> update(){
         switch (tabla) {
-            case "jugador":
+            case "Jugador":
                 return updateJugador();
-            case "equipo":
+            case "Equipo":
                 return updateEquipo();
             default:
                 System.out.println("ERRORupdates()");
@@ -92,7 +97,7 @@ public class CRUD {
     public List<Object> updateJugador(){
         Jugador datosJugador=(Jugador)object;
         Jugador jugador = new Jugador();
-        jugador = (Jugador) session.get(Jugador.class, id);
+        jugador = (Jugador) session.get(Jugador.class, 3);
         if(jugador != null){
             jugador.setAltura(datosJugador.getAltura());
             jugador.setApellido(datosJugador.getApellido());
@@ -104,6 +109,7 @@ public class CRUD {
             jugador.setSalario(datosJugador.getSalario());
                     
             session.update(jugador);
+            resultado.add("La fila de la taba "+tabla+" con el id "+id+" ha sido actualizada.");
             
         }else{
             resultado.add("No se ha encontrado el Id: "+id+" de la tabla: "+tabla);
@@ -115,6 +121,7 @@ public class CRUD {
         
     }
     public List<Object> updateEquipo(){
+        
         return resultado;
     }
     

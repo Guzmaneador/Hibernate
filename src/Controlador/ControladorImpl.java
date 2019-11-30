@@ -19,6 +19,7 @@ public class ControladorImpl implements Controlador{
     
     @Override
     public void iniciar(){
+        vista.menuInicio();
     }
     
     public List<Object> CRUDControlado(String accion, String tabla, Object object, String id){

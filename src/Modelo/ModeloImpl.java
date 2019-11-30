@@ -14,5 +14,5 @@ public class ModeloImpl implements Modelo{
         return crud.analizarAccion(accion, tabla, object, id);
     }
     
-
+    
 }
