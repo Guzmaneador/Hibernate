@@ -66,44 +66,47 @@ public class VistaImpl implements Vista {
         System.out.println("->3. Update ");
         System.out.println("->4. Delete ");
         System.out.println("->0. Volver al inicio. ");
+        String id ;
         switch (teclado.nextInt()) {
             case 1:
-                controlador.CRUDControlado(CREATE, tabla, null, null);
+                teclado.nextLine();
+                mostrarResultado(controlador.CRUDControlado(CREATE, tabla, solicitarDatosJugador(), null));
                 break;
             case 2:
+                teclado.nextLine();
                 mostrarResultado(controlador.CRUDControlado(READ, tabla, null, null));
 
                 break;
             case 3:
                 teclado.nextLine();
                 System.out.print("-->Indicque el id del "+tabla+" que desea modificar: ");
-                String id = teclado.nextLine();
-                mostrarResultado(controlador.CRUDControlado(UPDATE, tabla, solicitarDatosJugador(), id));
+                id = teclado.nextLine();
+                Object object = new Object();
+                switch (tabla) {
+                    case "Jugador":
+                        object=solicitarDatosJugador();
+                        break;
+                    case "Equipo":
+                        object=solicitarDatosEquipo();
+                    default:
+                        System.out.println("ERRORupdatesVista()");
+                }
+                mostrarResultado(controlador.CRUDControlado(UPDATE, tabla, object, id));
 
                 break;
             case 4:
-                controlador.CRUDControlado(DELETE, tabla, null, null);
-
+                teclado.nextLine();
+                System.out.print("-->Indicque el id del "+tabla+" que desea eliminar: ");
+                mostrarResultado(controlador.CRUDControlado(DELETE, tabla, null,teclado.nextLine()));
                 break;
             case 0:
+                teclado.nextLine();
                 menuInicio();
                 break;
             default:
+                teclado.nextLine();
                 System.out.println("Parametro invalido.");
                 menuCRUD(tabla);
-        }
-
-    }
-
-    public void mostrarResultado(List<Object> lista) {
-        for (Object object : lista) {
-            System.out.println(object);
-//            Jugador j=(Jugador) object;
-//                   Hibernate.initialize(j);
-//                  Equipo e= j.getEquipo();
-//                  e.getNombre();
-
-//                        System.out.println(object.toString());
         }
 
     }
@@ -131,6 +134,21 @@ public class VistaImpl implements Vista {
         return jugador;
 
     }
+    
+    public Equipo solicitarDatosEquipo() {
+        Equipo equipo = new Equipo();
+        System.out.print("-->Nombre: ");
+        equipo.setNombre(teclado.nextLine());
+        System.out.print("-->Ciudad: ");
+        equipo.setCiudad(teclado.nextLine());
+        System.out.print("--> Web:");
+        equipo.setWeb(teclado.nextLine());
+        System.out.print("-->Puntos: ");
+        equipo.setPuntos(teclado.nextInt());
+        teclado.nextLine();
+        return equipo;
+
+    }
 
     public Equipo verificarEquipo(String id) {
         List<Object> objetos = controlador.CRUDControlado(READ, "Equipo", null, null);
@@ -144,6 +162,14 @@ public class VistaImpl implements Vista {
         System.out.println("No existe nigun Equipo con ese id");
         menuInicio();
         return new Equipo();
+    }
+    
+    public void mostrarResultado(List<Object> lista) {
+        for (Object object : lista) {
+            System.out.println(object);
+        }
+        menuInicio();
+
     }
 
 }
