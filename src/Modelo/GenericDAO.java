@@ -14,7 +14,7 @@ import org.hibernate.Transaction;
 public interface GenericDAO {
     public static final SessionFactory sessionFactori =(SessionFactory) HibernateUtil.getSessionFactory();
     
-    public Object analizarAccion(String Accion,Object object, Serializable id, Class<Object> entityClass);
+    public Object analizarAccion(String Accion,Object object, Serializable id, Class entityClass);
     
     public Session getSession();
     

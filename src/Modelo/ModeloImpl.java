@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.JugadorDAO.JugadorDAO;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  */
 public class ModeloImpl implements Modelo{
     CRUD crud = new CRUD();
+    JugadorDAO jugadorDao= new JugadorDAO();
 
     @Override
     public List<Object> CRUDModelo(String accion, String tabla, Object object, String id) {
@@ -17,8 +19,8 @@ public class ModeloImpl implements Modelo{
     }
 
     @Override
-    public Object JugadorDaoModelo(String Accion, Object object, Serializable id, Class<Object> entityClass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object JugadorDaoModelo(String Accion, Object object, Serializable id, Class entityClass) {
+        jugadorDao.analizarAccion(Accion, object, id, entityClass);
     }
     
     

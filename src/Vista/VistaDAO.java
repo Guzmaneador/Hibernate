@@ -78,7 +78,14 @@ public class VistaDAO {
                 System.out.print("Indique el id del Jugador: ");
                 id = teclado.nextInt();
                 teclado.nextLine();
-                controlador.JugadorDaoControlador("DELETE",null,id, Jugador.class);
+                controlador.JugadorDaoControlador("JUGADOR",null,id, Jugador.class);
+                break;
+            case 5:
+                teclado.nextLine();
+                System.out.print("Indique el id del Jugador: ");
+                id = teclado.nextInt();
+                teclado.nextLine();
+                controlador.JugadorDaoControlador("LISTAR",null,id, Jugador.class);
                 break;
             case 0:
                 teclado.nextLine();

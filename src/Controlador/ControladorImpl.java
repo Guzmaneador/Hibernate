@@ -29,7 +29,7 @@ public class ControladorImpl implements Controlador{
 
     @Override
     public Object JugadorDaoControlador(String Accion, Object object, Serializable id, Class entityClass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return modelo.JugadorDaoModelo(Accion, object, id, entityClass);
     }
     
 

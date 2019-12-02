@@ -18,8 +18,23 @@ public class JugadorDAO implements GenericDAO{
     Transaction transaction;
     
     @Override
-    public Object analizarAccion(String Accion, Object object, Serializable id, Class<Object> entityClass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List <Object> analizarAccion(String Accion, Object object, Serializable id, Class entityClass) {
+        switch (Accion) {
+            case val:
+                
+                break;
+            case val:
+                
+                break;
+            case val:
+                
+                break;
+            case val:
+                
+                break;
+            default:
+                throw new AssertionError();
+        }
     }
 
     @Override
@@ -117,7 +132,7 @@ public class JugadorDAO implements GenericDAO{
     }
     
     
-    //SELECT nombre from jugador as Ju
+//SELECT nombre from jugador as Ju
 //        Where salario >
 //                  (Select MAX(Ju2.salario) FROM jugador as Ju2
 //                        WHERE Ju2.empresa = ?)
