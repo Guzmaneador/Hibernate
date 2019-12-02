@@ -31,6 +31,11 @@ public class ControladorImpl implements Controlador{
     public Object JugadorDaoControlador(String Accion, Object object, Serializable id, Class entityClass) {
         return modelo.JugadorDaoModelo(Accion, object, id, entityClass);
     }
+
+    @Override
+    public List<Object> EquipoDaoModelo(String Accion, Object object, Serializable id, Class entityClass) {
+        return modelo.EquipoDaoModelo(Accion, object, id, entityClass);
+    }
     
 
 }

@@ -3,6 +3,7 @@ package Modelo.JugadorDAO;
 import Modelo.GenericDAO;
 import static Modelo.GenericDAO.sessionFactori;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -16,22 +17,22 @@ import org.hibernate.Transaction;
 public class JugadorDAO implements GenericDAO{
     Session session;
     Transaction transaction;
+    List<Object> resultado = new ArrayList<>();
     
     @Override
     public List <Object> analizarAccion(String Accion, Object object, Serializable id, Class entityClass) {
         switch (Accion) {
-            case val:
+            case "INSERT":
+                return insert(object);
                 
-                break;
-            case val:
-                
-                break;
-            case val:
-                
-                break;
-            case val:
-                
-                break;
+            case "UPDATE":
+                return update(object);
+            case "DELETE":
+                return delete(object);
+            case "JUGADOR":
+                return damePorId(id, entityClass);
+            case "LISTAR":
+                return listar(entityClass);
             default:
                 throw new AssertionError();
         }
@@ -63,17 +64,19 @@ public class JugadorDAO implements GenericDAO{
     }
 
     @Override
-    public void insert(Object object) {
+    public List<Object> insert(Object object) {
         session= getSession();
         starTransaction();
         session.save(object);
         endTransaction();
         closeSesion(session);
+        resultado.add("Jugador añadido con exito.");
+        return resultado;
         
     }
     
     @Override
-    public void update(Object object) {
+    public List<Object> update(Object object) {
         session= getSession();
         starTransaction();
         Jugador datosJugador=(Jugador)object;
@@ -91,35 +94,37 @@ public class JugadorDAO implements GenericDAO{
                     
             session.update(jugador);
             endTransaction();
-            System.out.println("El Jugador con el id: "+jugador.getIdJugador()+" ha sido actualizada.");
+            resultado.add("El Jugador con el id: "+jugador.getIdJugador()+" ha sido actualizada.");
             
         }else{
-            System.out.println("No se ha encontrado el Jugador con el id: "+jugador.getIdJugador());
+            resultado.add("No se ha encontrado el Jugador con el id: "+jugador.getIdJugador());
         }
         closeSesion(session);
+        return resultado;
     }
 
     @Override
-    public void delete(Object object) {
+    public List<Object> delete(Object object) {
         session= getSession();
         starTransaction();
         if(object != null){
             session.delete(object);
             endTransaction();
-            System.out.println("Se ha borrado el jugador" );
+            resultado.add("Se ha borrado el jugador" );
         }else{
-            System.out.println("No se he podido borrar el Jugador indicado");
+            resultado.add("No se he podido borrar el Jugador indicado");
         }
+        return resultado;
     }
 
     @Override
-    public Object damePorId(Serializable id, Class entityClass) {      
+    public List<Object> damePorId(Serializable id, Class entityClass) {      
         session= getSession();
         Jugador jugador = (Jugador) session.get(entityClass, id);
         starTransaction();
         closeSesion(session);
-
-      return jugador;        
+        resultado.add(jugador);
+      return resultado;        
     }
 
     @Override
@@ -132,19 +137,22 @@ public class JugadorDAO implements GenericDAO{
     }
     
     
-//SELECT nombre from jugador as Ju
-//        Where salario >
-//                  (Select MAX(Ju2.salario) FROM jugador as Ju2
-//                        WHERE Ju2.empresa = ?)
+//SELECT nombre from jugador as Ju WHERE salario > (Select MAX(Ju2.salario) FROM jugador as Ju2 WHERE Ju2.equipo = "Gran Canaria" 
     
-
 //Select nombre, apellido, equipo
-//FROM jugador as Ju
-//capitan =
-//      (SELECT capitan
+//FROM jugador
+//WHERE id_capitan =
+//      (SELECT id_capitan
 //       FROM jugador 
-//       WHERE nombre = ?)
+//       WHERE nombre = "Pablo")
+
+//  SELECT count(*) from equipo as Eq
+//    
+//
+//    
+//
+//    
+//
 
 
-    
 }

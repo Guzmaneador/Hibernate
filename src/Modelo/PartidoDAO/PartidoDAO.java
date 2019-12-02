@@ -38,17 +38,22 @@ public class PartidoDAO implements GenericDAO {
     }
 
     @Override
-    public void insert(Object object) {
+    public List<Object> analizarAccion(String Accion, Object object, Serializable id, Class entityClass) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Object object) {
+    public List<Object> insert(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Object object) {
+    public List<Object> update(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Object> delete(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -62,9 +67,7 @@ public class PartidoDAO implements GenericDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Object analizarAccion(String Accion, Object object, Serializable id, Class entityClass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
+
 
 }

@@ -11,13 +11,15 @@ import java.util.Scanner;
  *
  * @author Guzman
  */
-public class VistaDAO {
+public class VistaDAOJugadores {
     Scanner teclado = new Scanner(System.in);
     private static final String EQUIPO = "Equipo";
     private static final String JUGADORES = "Jugador";
     Controlador controlador;
+    Vista vista = new VistaImpl();
+    VistaDAOEquipos vistaDaoEquipo = new VistaDAOEquipos(controlador);
 
-    public VistaDAO(Controlador controlador) {
+    public VistaDAOJugadores(Controlador controlador) {
         this.controlador = controlador;
     }
     
@@ -32,14 +34,14 @@ public class VistaDAO {
                         menuAccionEquipo();
                         break;
                     case 2:
-                        menuAccionJugador();
+                       vistaDaoEquipo.menuAccionEquipo();
                         break;
                     case 3:
 
                         break;
                     default:
                         System.out.println("Parametro no valido");
-                        menu();
+                        vista.menuInicio();
                 }
     }
     
@@ -137,6 +139,13 @@ public class VistaDAO {
 
     private void menuAccionEquipo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public void mostrarResultado(List<Object> lista) {
+        for (Object object : lista) {
+            
+            System.out.println(object);
+        }
+        menu();
     }
 
 }

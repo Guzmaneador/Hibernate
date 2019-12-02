@@ -2,6 +2,7 @@ package Modelo.EquipoDAO;
 
 import Modelo.GenericDAO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -14,7 +15,13 @@ import org.hibernate.Transaction;
 public class EquipoDAO implements GenericDAO{
     Session session;
     Transaction transaction;
+    List<Object> resultado = new ArrayList<>();
 
+    @Override
+    public List<Object>analizarAccion(String Accion, Object object, Serializable id, Class entityClass) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     @Override
     public Session getSession() {
         return sessionFactori.openSession();
@@ -41,22 +48,26 @@ public class EquipoDAO implements GenericDAO{
     }
 
     @Override
-    public void insert(Object object) {
+    public List<Object> insert(Object object) {
         session= getSession();
         starTransaction();
         session.save(object);
         endTransaction();
         closeSesion(session);
+        resultado.add("Equipo Inseertado.");
+        return resultado;
         
     }
 
+
+
     @Override
-    public void update(Object object) {
+    public List<Object> update(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Object object) {
+    public List<Object> delete(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -70,9 +81,5 @@ public class EquipoDAO implements GenericDAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Object analizarAccion(String Accion, Object object, Serializable id, Class entityClass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

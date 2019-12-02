@@ -14,7 +14,7 @@ import org.hibernate.Transaction;
 public interface GenericDAO {
     public static final SessionFactory sessionFactori =(SessionFactory) HibernateUtil.getSessionFactory();
     
-    public Object analizarAccion(String Accion,Object object, Serializable id, Class entityClass);
+    public List<Object> analizarAccion(String Accion,Object object, Serializable id, Class entityClass);
     
     public Session getSession();
     
@@ -26,11 +26,11 @@ public interface GenericDAO {
     
     public void handleException(HibernateException hex);
     
-    public void insert (Object object);
+    public List<Object> insert (Object object);
     
-    public void update(Object object);
+    public List<Object> update(Object object);
     
-    public void delete (Object object);
+    public List<Object> delete (Object object);
     
     public Object damePorId(Serializable id, Class entityClass);
     

@@ -23,6 +23,7 @@ public class VistaImpl implements Vista {
     private static final String UPDATE = "UPDATE";
     private static final String READ = "READ";
     private static final String DELETE = "DELETE";
+    VistaDAOJugadores vistaDao= new VistaDAOJugadores(controlador);
 
     public void menuInicio() {
         System.out.println("-----INICIO------");
@@ -42,7 +43,7 @@ public class VistaImpl implements Vista {
                         menuCRUD(JUGADORES);
                         break;
                     case 3:
-
+                         vistaDao.menu();
                         break;
                     default:
                         System.out.println("Parametro no valido");
@@ -170,7 +171,6 @@ public class VistaImpl implements Vista {
             System.out.println(object);
         }
         menuInicio();
-
     }
 
 }
