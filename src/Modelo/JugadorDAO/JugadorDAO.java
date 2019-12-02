@@ -16,6 +16,11 @@ import org.hibernate.Transaction;
 public class JugadorDAO implements GenericDAO{
     Session session;
     Transaction transaction;
+    
+    @Override
+    public Object analizarAccion(String Accion, Object object, Serializable id, Class<Object> entityClass) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public Session getSession() {
@@ -93,18 +98,25 @@ public class JugadorDAO implements GenericDAO{
     }
 
     @Override
-    public Object damePorId(Serializable id, Class<Object> entityClass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object damePorId(Serializable id, Class entityClass) {      
+        session= getSession();
+        Jugador jugador = (Jugador) session.get(entityClass, id);
+        starTransaction();
+        closeSesion(session);
+
+      return jugador;        
     }
 
     @Override
-    public List<Object> listar(Class<Object> entityClass) {
+    public List<Object> listar(Class entityClass) {
         session= getSession();        
         Query consulta = session.createQuery("from Jugador");
         List<Object> resultado = consulta.list();
         session.close();
         return resultado;
     }
+    
+    
     //SELECT nombre from jugador as Ju
 //        Where salario >
 //                  (Select MAX(Ju2.salario) FROM jugador as Ju2
@@ -117,5 +129,7 @@ public class JugadorDAO implements GenericDAO{
 //      (SELECT capitan
 //       FROM jugador 
 //       WHERE nombre = ?)
+
+
     
 }

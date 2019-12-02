@@ -166,6 +166,7 @@ public class VistaImpl implements Vista {
     
     public void mostrarResultado(List<Object> lista) {
         for (Object object : lista) {
+            
             System.out.println(object);
         }
         menuInicio();
