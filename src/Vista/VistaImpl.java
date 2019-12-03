@@ -23,11 +23,17 @@ public class VistaImpl implements Vista {
     private static final String UPDATE = "UPDATE";
     private static final String READ = "READ";
     private static final String DELETE = "DELETE";
-    VistaDAOJugadores vistaDao= new VistaDAOJugadores(controlador);
+    VistaDAOJugadores vistaDao;
+
+    public VistaImpl() {
+    }
 
     public void menuInicio() {
+                vistaDao= new VistaDAOJugadores();
+
         System.out.println("-----INICIO------");
         System.out.println("->1. Relizar un CRUD de la base de datos.");
+        System.out.println("->2. Relizar un CRUD con GenereicDAO.");
         System.out.println("->0. Salir");
         switch (teclado.nextInt()) {
             case 1:
@@ -42,13 +48,14 @@ public class VistaImpl implements Vista {
                     case 2:
                         menuCRUD(JUGADORES);
                         break;
-                    case 3:
-                         vistaDao.menu();
-                        break;
+
                     default:
                         System.out.println("Parametro no valido");
                         menuInicio();
                 }
+                break;
+            case 2:
+                vistaDao.menu();
                 break;
 
             case 0:

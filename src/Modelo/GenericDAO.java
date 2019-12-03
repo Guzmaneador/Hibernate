@@ -32,7 +32,7 @@ public interface GenericDAO <T>{
     
     public List<Object> delete (T object);
     
-    public Object damePorId(Serializable id, Class entityClass);
+    public List<Object> damePorId(Serializable id, Class entityClass);
     
     public List<Object>  listar(Class entityClass);
     

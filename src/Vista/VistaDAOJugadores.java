@@ -1,8 +1,10 @@
 package Vista;
 
 import Controlador.Controlador;
+import Controlador.ControladorImpl;
 import Modelo.EquipoDAO.Equipo;
 import Modelo.JugadorDAO.Jugador;
+import Modelo.ModeloImpl;
 import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -15,29 +17,27 @@ public class VistaDAOJugadores {
     Scanner teclado = new Scanner(System.in);
     private static final String EQUIPO = "Equipo";
     private static final String JUGADORES = "Jugador";
-    Controlador controlador;
-    Vista vista = new VistaImpl();
-    VistaDAOEquipos vistaDaoEquipo = new VistaDAOEquipos(controlador);
+    Controlador controlador = new ControladorImpl(new ModeloImpl(),new VistaImpl());
 
-    public VistaDAOJugadores(Controlador controlador) {
-        this.controlador = controlador;
+    Vista vista = new VistaImpl();
+    VistaDAOEquipos vistaDaoEquipo = new VistaDAOEquipos();
+
+    public VistaDAOJugadores() {
+        
     }
     
     
     public void menu(){
                 System.out.println("\n---Selecione la tabla---");
-                System.out.println("->1.Equipo.");
-                System.out.println("->2.Jugadores.");
+                System.out.println("->1.Jugadores.");
+                System.out.println("->2.Equipo.");
                 System.out.println("->0.Volver a inicio.");
                 switch (teclado.nextInt()) {
                     case 1:
-                        menuAccionEquipo();
+                        menuAccionJugador();
                         break;
                     case 2:
                        vistaDaoEquipo.menuAccionEquipo();
-                        break;
-                    case 3:
-
                         break;
                     default:
                         System.out.println("Parametro no valido");
@@ -137,9 +137,6 @@ public class VistaDAOJugadores {
         return new Equipo();
     }
 
-    private void menuAccionEquipo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     public void mostrarResultado(List<Object> lista) {
         for (Object object : lista) {
             

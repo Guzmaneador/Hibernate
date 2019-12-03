@@ -137,7 +137,7 @@ public class JugadorDAO implements GenericDAO<Jugador>{
     }
     
     
-//SELECT nombre from jugador as Ju WHERE salario > (Select MAX(Ju2.salario) FROM jugador as Ju2 WHERE Ju2.equipo = "Gran Canaria" 
+//SELECT nombre from jugador as Ju WHERE salario > (Select MAX(Ju2.salario) FROM jugador as Ju2 WHERE Ju2.equipo = 3) 
     
 //Select nombre, apellido, equipo
 //FROM jugador

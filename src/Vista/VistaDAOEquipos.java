@@ -1,8 +1,10 @@
 package Vista;
 
 import Controlador.Controlador;
+import Controlador.ControladorImpl;
 import Modelo.EquipoDAO.Equipo;
 import Modelo.JugadorDAO.Jugador;
+import Modelo.ModeloImpl;
 import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -13,11 +15,12 @@ import java.util.Scanner;
  */
 public class VistaDAOEquipos {
     Scanner teclado = new Scanner(System.in);
-    Controlador controlador;
+        Controlador controlador ;
+
     Vista vista = new VistaImpl();
 
-    public VistaDAOEquipos(Controlador controlador) {
-        this.controlador = controlador;
+    public VistaDAOEquipos() {
+        controlador = new ControladorImpl(new ModeloImpl(),new VistaImpl());
     }
     
     public void menuAccionEquipo(){
@@ -32,14 +35,14 @@ public class VistaDAOEquipos {
         switch (teclado.nextInt()) {
             case 1:
                 teclado.nextLine();
-                controlador.equipoDaoControlador("INSERT", solicitarDatosEquipo(), null, null);
+                mostrarResultado(controlador.equipoDaoControlador("INSERT", solicitarDatosEquipo(), null, null));
                 break;
             case 2:
                 teclado.nextLine();
                 System.out.print("Indique el id del Jugador: ");
                 id = teclado.nextInt();
                 teclado.nextLine();
-                controlador.equipoDaoControlador("UPDATE", solicitarDatosEquipo(), id, null);
+                mostrarResultado(controlador.equipoDaoControlador("UPDATE", solicitarDatosEquipo(), id, null));
                 break;
             case 3:
                 teclado.nextLine();
@@ -48,21 +51,21 @@ public class VistaDAOEquipos {
                 Equipo equipo = new Equipo();
                 teclado.nextLine();
                 equipo.setIdEquipo(id);
-                controlador.equipoDaoControlador("DELETE",equipo,null, null);
+                mostrarResultado(controlador.equipoDaoControlador("DELETE",equipo,null, null));
                 break;
             case 4:
                 teclado.nextLine();
                 System.out.print("Indique el id del Jugador: ");
                 id = teclado.nextInt();
                 teclado.nextLine();
-                controlador.equipoDaoControlador("JUGADOR",null,id, Jugador.class);
+                mostrarResultado(controlador.equipoDaoControlador("JUGADOR",null,id, Jugador.class));
                 break;
             case 5:
                 teclado.nextLine();
                 System.out.print("Indique el id del Jugador: ");
                 id = teclado.nextInt();
                 teclado.nextLine();
-                controlador.equipoDaoControlador("LISTAR",null,id, Jugador.class);
+                mostrarResultado(controlador.equipoDaoControlador("LISTAR",null,id, Jugador.class));
                 break;
             case 0:
                 teclado.nextLine();

@@ -19,7 +19,24 @@ public class EquipoDAO implements GenericDAO<Equipo>{
 
     @Override
     public List<Object>analizarAccion(String Accion, Equipo object, Serializable id, Class entityClass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        switch (Accion) {
+            case "INSERT":
+                return insert(object);
+                
+            case "UPDATE":
+                return update(object);
+            case "DELETE":
+                return delete(object);
+            case "JUGADOR":
+                return damePorId(id, entityClass);
+
+            case "LISTAR":
+//                return listar(entityClass);
+                                throw new AssertionError();
+
+            default:
+                throw new AssertionError();
+        }
     }
     
     @Override
@@ -86,10 +103,11 @@ public class EquipoDAO implements GenericDAO<Equipo>{
 
     @Override
     public List<Object> delete(Equipo object) {
-               session= getSession();
+        session= getSession();
         starTransaction();
-        if(object != null){
-            session.delete(object);
+        Equipo jugadorBorrar = (Equipo) session.get(Equipo.class,object.getIdEquipo());
+        if(jugadorBorrar != null){
+            session.delete(jugadorBorrar);
             endTransaction();
             resultado.add("Se ha borrado el jugador" );
         }else{
@@ -99,8 +117,19 @@ public class EquipoDAO implements GenericDAO<Equipo>{
     }
 
     @Override
-    public Object damePorId(Serializable id, Class entityClass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Object> damePorId(Serializable id, Class entityClass) {
+        session= getSession();
+        starTransaction();
+        Equipo equipo = new Equipo();
+        equipo =(Equipo) session.get(entityClass, id);
+        if(equipo != null){
+            endTransaction();
+            resultado.add(equipo);
+        }else{
+            resultado.add("No se ha encontrado el jugador con la id: "+id);
+        }
+        closeSesion(session);
+        return resultado ;
     }
 
     @Override

@@ -58,7 +58,7 @@ public class PartidoDAO implements GenericDAO {
     }
 
     @Override
-    public Object damePorId(Serializable id, Class entityClass) {
+    public List<Object> damePorId(Serializable id, Class entityClass) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
