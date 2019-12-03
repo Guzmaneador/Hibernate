@@ -1,6 +1,8 @@
 package Modelo;
 
+import Modelo.EquipoDAO.Equipo;
 import Modelo.EquipoDAO.EquipoDAO;
+import Modelo.JugadorDAO.Jugador;
 import Modelo.JugadorDAO.JugadorDAO;
 import java.io.Serializable;
 import java.util.List;
@@ -21,12 +23,12 @@ public class ModeloImpl implements Modelo{
     }
 
     @Override
-    public Object JugadorDaoModelo(String Accion, Object object, Serializable id, Class entityClass) {
+    public Object JugadorDaoModelo(String Accion, Jugador object, Serializable id, Class entityClass) {
         return jugadorDao.analizarAccion(Accion, object, id, entityClass);
     }
 
     @Override
-    public List<Object> EquipoDaoModelo(String Accion, Object object, Serializable id, Class entityClass) {
+    public List<Object> EquipoDaoModelo(String Accion, Equipo object, Serializable id, Class entityClass) {
         return equipoDao.analizarAccion(Accion, object, id, entityClass);
     }
     

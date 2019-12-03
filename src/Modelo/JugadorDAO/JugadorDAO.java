@@ -14,13 +14,13 @@ import org.hibernate.Transaction;
  *
  * @author Guzman
  */
-public class JugadorDAO implements GenericDAO{
+public class JugadorDAO implements GenericDAO<Jugador>{
     Session session;
     Transaction transaction;
     List<Object> resultado = new ArrayList<>();
     
     @Override
-    public List <Object> analizarAccion(String Accion, Object object, Serializable id, Class entityClass) {
+    public List <Object> analizarAccion(String Accion, Jugador object, Serializable id, Class entityClass) {
         switch (Accion) {
             case "INSERT":
                 return insert(object);
@@ -64,7 +64,7 @@ public class JugadorDAO implements GenericDAO{
     }
 
     @Override
-    public List<Object> insert(Object object) {
+    public List<Object> insert(Jugador object) {
         session= getSession();
         starTransaction();
         session.save(object);
@@ -76,7 +76,7 @@ public class JugadorDAO implements GenericDAO{
     }
     
     @Override
-    public List<Object> update(Object object) {
+    public List<Object> update(Jugador object) {
         session= getSession();
         starTransaction();
         Jugador datosJugador=(Jugador)object;
@@ -104,7 +104,7 @@ public class JugadorDAO implements GenericDAO{
     }
 
     @Override
-    public List<Object> delete(Object object) {
+    public List<Object> delete(Jugador object) {
         session= getSession();
         starTransaction();
         if(object != null){

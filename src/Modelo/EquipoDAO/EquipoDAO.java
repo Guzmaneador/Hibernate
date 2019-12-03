@@ -12,13 +12,13 @@ import org.hibernate.Transaction;
  *
  * @author Guzman
  */
-public class EquipoDAO implements GenericDAO{
+public class EquipoDAO implements GenericDAO<Equipo>{
     Session session;
     Transaction transaction;
     List<Object> resultado = new ArrayList<>();
 
     @Override
-    public List<Object>analizarAccion(String Accion, Object object, Serializable id, Class entityClass) {
+    public List<Object>analizarAccion(String Accion, Equipo object, Serializable id, Class entityClass) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -48,7 +48,7 @@ public class EquipoDAO implements GenericDAO{
     }
 
     @Override
-    public List<Object> insert(Object object) {
+    public List<Object> insert(Equipo object) {
         session= getSession();
         starTransaction();
         session.save(object);
@@ -62,13 +62,40 @@ public class EquipoDAO implements GenericDAO{
 
 
     @Override
-    public List<Object> update(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Object> update(Equipo object) {
+        session= getSession();
+        starTransaction();
+        Equipo datosEquipo=(Equipo)object;
+        Equipo equipo = new Equipo();
+        equipo = (Equipo) session.get(Equipo.class, equipo.getIdEquipo());
+        if(equipo != null){
+
+            equipo.setNombre(datosEquipo.getNombre());
+
+                    
+            session.update(equipo);
+            endTransaction();
+            resultado.add("El Jugador con el id: "+equipo.getIdEquipo()+" ha sido actualizada.");
+            
+        }else{
+            resultado.add("No se ha encontrado el Jugador con el id: "+equipo.getIdEquipo());
+        }
+        closeSesion(session);
+        return resultado;
     }
 
     @Override
-    public List<Object> delete(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Object> delete(Equipo object) {
+               session= getSession();
+        starTransaction();
+        if(object != null){
+            session.delete(object);
+            endTransaction();
+            resultado.add("Se ha borrado el jugador" );
+        }else{
+            resultado.add("No se he podido borrar el Jugador indicado");
+        }
+        return resultado;
     }
 
     @Override

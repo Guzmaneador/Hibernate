@@ -32,37 +32,37 @@ public class VistaDAOEquipos {
         switch (teclado.nextInt()) {
             case 1:
                 teclado.nextLine();
-                controlador.JugadorDaoControlador("INSERT", solicitarDatosEquipo(), null, null);
+                controlador.equipoDaoControlador("INSERT", solicitarDatosEquipo(), null, null);
                 break;
             case 2:
                 teclado.nextLine();
                 System.out.print("Indique el id del Jugador: ");
                 id = teclado.nextInt();
                 teclado.nextLine();
-                controlador.JugadorDaoControlador("UPDATE", solicitarDatosEquipo(), id, null);
+                controlador.equipoDaoControlador("UPDATE", solicitarDatosEquipo(), id, null);
                 break;
             case 3:
                 teclado.nextLine();
                 System.out.print("Indique el id del Jugador: ");
                 id = teclado.nextInt();
-                Jugador jugador = new Jugador();
+                Equipo equipo = new Equipo();
                 teclado.nextLine();
-                jugador.setIdJugador(id);
-                controlador.JugadorDaoControlador("DELETE",jugador,null, null);
+                equipo.setIdEquipo(id);
+                controlador.equipoDaoControlador("DELETE",equipo,null, null);
                 break;
             case 4:
                 teclado.nextLine();
                 System.out.print("Indique el id del Jugador: ");
                 id = teclado.nextInt();
                 teclado.nextLine();
-                controlador.JugadorDaoControlador("JUGADOR",null,id, Jugador.class);
+                controlador.equipoDaoControlador("JUGADOR",null,id, Jugador.class);
                 break;
             case 5:
                 teclado.nextLine();
                 System.out.print("Indique el id del Jugador: ");
                 id = teclado.nextInt();
                 teclado.nextLine();
-                controlador.JugadorDaoControlador("LISTAR",null,id, Jugador.class);
+                controlador.equipoDaoControlador("LISTAR",null,id, Jugador.class);
                 break;
             case 0:
                 teclado.nextLine();

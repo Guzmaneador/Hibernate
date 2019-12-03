@@ -1,5 +1,7 @@
 package Controlador;
 
+import Modelo.EquipoDAO.Equipo;
+import Modelo.JugadorDAO.Jugador;
 import Modelo.Modelo;
 import Vista.Vista;
 import java.io.Serializable;
@@ -28,12 +30,12 @@ public class ControladorImpl implements Controlador{
     }
 
     @Override
-    public Object JugadorDaoControlador(String Accion, Object object, Serializable id, Class entityClass) {
+    public Object JugadorDaoControlador(String Accion, Jugador object, Serializable id, Class entityClass) {
         return modelo.JugadorDaoModelo(Accion, object, id, entityClass);
     }
 
     @Override
-    public List<Object> EquipoDaoModelo(String Accion, Object object, Serializable id, Class entityClass) {
+    public List<Object> equipoDaoControlador(String Accion, Equipo object, Serializable id, Class entityClass) {
         return modelo.EquipoDaoModelo(Accion, object, id, entityClass);
     }
     
