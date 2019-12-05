@@ -1,5 +1,6 @@
 package Modelo.PartidoDAO;
 
+import Modelo.EquipoDAO.Equipo;
 import Modelo.GenericDAO;
 import Modelo.JugadorDAO.Jugador;
 import java.io.Serializable;
@@ -152,6 +153,22 @@ public class PartidoDAO implements GenericDAO {
         
         closeSesion(session);
         return solucion;
+    }
+    public List<Object> obtenerPerdedores(){
+        List<Object> solucion = new ArrayList();
+        String consulta = "FROM Equipo as Eq WHERE Eq.puntos = (SELECT MIN(Eq2.puntos) FROM Equipo as Eq2)";
+        List<Object> result = new ArrayList<>();
+        session=getSession();
+        Query query = session.createQuery(consulta);
+         result = query.list();
+//         int totalPartidos=0;
+//         
+//           for (Jugador respuesta : result) {
+//               solucion.add(respuesta.getNombre());
+//           }
+        
+        closeSesion(session);
+        return result;
     }
 
 

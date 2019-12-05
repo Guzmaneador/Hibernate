@@ -37,6 +37,7 @@ public class VistaImpl implements Vista {
         System.out.println("->1. Relizar un CRUD de la base de datos.");
         System.out.println("->2. Relizar un CRUD con GenereicDAO.");     
         System.out.println("->3. Consulta Jugadores mas cobran que el que mas cobra de un equipo.");     
+        System.out.println("->4. Consultar cual es el equipo colista.");     
         System.out.println("->10. Consultar nombre,apellido de jugadores con capitan de un jugador.");
         System.out.println("->11. Consultar partidos ganados por un equipo y arbrito.");
         System.out.println("->0. Salir");
@@ -68,6 +69,11 @@ public class VistaImpl implements Vista {
                 System.out.print("Indique el nombre del Equipo: ");
                 String nombreEquipazo=teclado.nextLine();
                 mostrarResultado(partidoDao.jugadoresMasCobran(nombreEquipazo));
+                menuInicio();
+                break;
+            case 4:
+                teclado.nextLine();
+                mostrarResultado(partidoDao.obtenerPerdedores());
                 menuInicio();
                 break;
             case 11:
