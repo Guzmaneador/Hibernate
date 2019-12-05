@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -19,6 +20,7 @@ public class EquipoDAO implements GenericDAO<Equipo>{
 
     @Override
     public List<Object>analizarAccion(String Accion, Equipo object, Serializable id, Class entityClass) {
+        resultado.clear();
         switch (Accion) {
             case "INSERT":
                 return insert(object);
@@ -31,8 +33,8 @@ public class EquipoDAO implements GenericDAO<Equipo>{
                 return damePorId(id, entityClass);
 
             case "LISTAR":
-//                return listar(entityClass);
-                                throw new AssertionError();
+                return listar(entityClass);
+          
 
             default:
                 throw new AssertionError();
@@ -134,7 +136,11 @@ public class EquipoDAO implements GenericDAO<Equipo>{
 
     @Override
     public List<Object> listar(Class entityClass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session= getSession();
+        Query consulta = session.createQuery("from Equipo");
+        resultado = consulta.list();
+        session.close();
+        return resultado;
     }
 
 

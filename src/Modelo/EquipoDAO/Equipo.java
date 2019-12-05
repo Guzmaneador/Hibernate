@@ -97,7 +97,7 @@ public class Equipo  implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Equipo{" + "idEquipo=" + idEquipo + ", nombre=" + nombre + ", ciudad=" + ciudad + ", web=" + web + ", puntos=" + puntos + ", partidosForVisitante=" + partidosForVisitante + ", jugadors=" + jugadors + ", partidosForLocal=" + partidosForLocal + '}';
+        return "Equipo{" + "idEquipo=" + idEquipo + ", nombre=" + nombre + ", ciudad=" + ciudad + ", web=" + web + ", puntos=" + puntos + '}';
     }
 
 

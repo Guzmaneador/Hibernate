@@ -1,5 +1,6 @@
 package Modelo.JugadorDAO;
 
+import Modelo.EquipoDAO.Equipo;
 import Modelo.GenericDAO;
 import static Modelo.GenericDAO.sessionFactori;
 import java.io.Serializable;
@@ -119,12 +120,19 @@ public class JugadorDAO implements GenericDAO<Jugador>{
 
     @Override
     public List<Object> damePorId(Serializable id, Class entityClass) {      
+
         session= getSession();
-        Jugador jugador = (Jugador) session.get(entityClass, id);
         starTransaction();
+        Jugador jugador = (Jugador) session.get(entityClass, id);
+
+        if(jugador != null){
+            endTransaction();
+            resultado.add(jugador);
+        }else{
+            resultado.add("No se ha encontrado el jugador con la id: "+id);
+        }
         closeSesion(session);
-        resultado.add(jugador);
-      return resultado;        
+        return resultado ;
     }
 
     @Override
@@ -149,7 +157,7 @@ public class JugadorDAO implements GenericDAO<Jugador>{
 //  SELECT count(*) from equipo as Eq
 //    
 //
-//    
+//    SELECT nombre, apellido, equipo FROM jugador WHERE id_capitan = (SELECT id_capitan FROM jugador WHERE nombre = "Victor")
 //
 //    
 //

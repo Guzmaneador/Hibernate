@@ -4,6 +4,7 @@ import Controlador.*;
 import Modelo.EquipoDAO.Equipo;
 import Modelo.JugadorDAO.Jugador;
 import Modelo.ModeloImpl;
+import Modelo.PartidoDAO.PartidoDAO;
 import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +25,7 @@ public class VistaImpl implements Vista {
     private static final String READ = "READ";
     private static final String DELETE = "DELETE";
     VistaDAOJugadores vistaDao;
+    PartidoDAO partidoDao = new PartidoDAO();
 
     public VistaImpl() {
     }
@@ -33,7 +35,9 @@ public class VistaImpl implements Vista {
 
         System.out.println("-----INICIO------");
         System.out.println("->1. Relizar un CRUD de la base de datos.");
-        System.out.println("->2. Relizar un CRUD con GenereicDAO.");
+        System.out.println("->2. Relizar un CRUD con GenereicDAO.");     
+        System.out.println("->10. Consultar partidos ganados por un equipo y arbrito.");
+        System.out.println("->11. Consultar partidos ganados por un equipo y arbrito.");
         System.out.println("->0. Salir");
         switch (teclado.nextInt()) {
             case 1:
@@ -49,6 +53,7 @@ public class VistaImpl implements Vista {
                         menuCRUD(JUGADORES);
                         break;
 
+
                     default:
                         System.out.println("Parametro no valido");
                         menuInicio();
@@ -56,6 +61,22 @@ public class VistaImpl implements Vista {
                 break;
             case 2:
                 vistaDao.menu();
+                break;
+            case 11:
+                teclado.nextLine();
+                System.out.print("Indique el nombre del Equipo: ");
+                String nombreEquipo=teclado.nextLine();
+                System.out.print("Indique el Id del Arbitro: ");
+                System.out.println(partidoDao.superconsulta(nombreEquipo, teclado.nextInt()));
+                teclado.nextLine();
+                menuInicio();
+                break;
+            case 10:
+                teclado.nextLine();
+                System.out.print("Indique el nombre del Jugador: ");
+                String nombreJugador=teclado.nextLine();
+                partidoDao.primeraConsulta(nombreJugador);
+                menuInicio();
                 break;
 
             case 0:
