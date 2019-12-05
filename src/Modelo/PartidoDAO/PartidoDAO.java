@@ -115,26 +115,43 @@ public class PartidoDAO implements GenericDAO {
         closeSesion(session);
         return totalPartidos;
     }
-    public int primeraConsulta(String nombreJugador){
+    
+    public void primeraConsulta(String nombreJugador){
         
-        String consulta = "SELECT Ju.nombre, Ju.apellido, Ju.equipo " +
+        String consulta = 
                             "FROM Jugador as Ju " +
                             "WHERE Ju.idCapitan = " +
                                 "(SELECT Ju2.idCapitan " +
                                 "FROM Jugador as Ju2 " +
                                 "WHERE Ju2.nombre = :nombrete)";
-        List<Object> result = new ArrayList<>();
+        List<Jugador> result = new ArrayList<>();
         session=getSession();
         Query query = session.createQuery(consulta);
         query.setString("nombrete", nombreJugador);
          result = query.list();
          int totalPartidos=0;
-           for (Object respuesta : result) {
-               System.out.println(respuesta);
+           for (Jugador respuesta : result) {
+               System.out.println(respuesta.getNombre()+", "+respuesta.getApellido()+", "+respuesta.getEquipo().getNombre());
            }
         
         closeSesion(session);
-        return totalPartidos;
+    }
+    public List<Object> jugadoresMasCobran(String nombreEquipo){
+        List<Object> solucion = new ArrayList();
+        String consulta = "FROM Jugador as Ju WHERE Ju.salario > (SELECT MAX(Ju2.salario) FROM  Jugador as Ju2 WHERE Ju2.equipo = (FROM Equipo as Eq WHERE Eq.nombre= :nombrete))";
+        List<Jugador> result = new ArrayList<>();
+        session=getSession();
+        Query query = session.createQuery(consulta);
+        query.setString("nombrete", nombreEquipo);
+         result = query.list();
+         int totalPartidos=0;
+         
+           for (Jugador respuesta : result) {
+               solucion.add(respuesta.getNombre());
+           }
+        
+        closeSesion(session);
+        return solucion;
     }
 
 
@@ -152,3 +169,5 @@ public class PartidoDAO implements GenericDAO {
 //                 Pa.local = (SELECT Eq.id_equipo 
 //                            FROM equipo as Eq 
 //                            WHERE Eq.nombre = "Gran Canaria")
+
+//FROM jugador as Ju WHERE Ju.salario > (FROM  jugador as JU2 WHERE Ju2.equipo=(FROM equipo as Eq WHERE Eq.nombre= ?)) 

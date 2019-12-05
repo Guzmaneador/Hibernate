@@ -36,7 +36,8 @@ public class VistaImpl implements Vista {
         System.out.println("-----INICIO------");
         System.out.println("->1. Relizar un CRUD de la base de datos.");
         System.out.println("->2. Relizar un CRUD con GenereicDAO.");     
-        System.out.println("->10. Consultar partidos ganados por un equipo y arbrito.");
+        System.out.println("->3. Consulta Jugadores mas cobran que el que mas cobra de un equipo.");     
+        System.out.println("->10. Consultar nombre,apellido de jugadores con capitan de un jugador.");
         System.out.println("->11. Consultar partidos ganados por un equipo y arbrito.");
         System.out.println("->0. Salir");
         switch (teclado.nextInt()) {
@@ -61,6 +62,13 @@ public class VistaImpl implements Vista {
                 break;
             case 2:
                 vistaDao.menu();
+                break;
+            case 3:
+                teclado.nextLine();
+                System.out.print("Indique el nombre del Equipo: ");
+                String nombreEquipazo=teclado.nextLine();
+                mostrarResultado(partidoDao.jugadoresMasCobran(nombreEquipazo));
+                menuInicio();
                 break;
             case 11:
                 teclado.nextLine();
