@@ -38,6 +38,7 @@ public class VistaImpl implements Vista {
         System.out.println("->2. Relizar un CRUD con GenereicDAO.");     
         System.out.println("->3. Consulta Jugadores mas cobran que el que mas cobra de un equipo.");     
         System.out.println("->4. Consultar cual es el equipo colista.");     
+        System.out.println("->5. Consultar cual es el capitan de un Equipo.");     
         System.out.println("->10. Consultar nombre,apellido de jugadores con capitan de un jugador.");
         System.out.println("->11. Consultar partidos ganados por un equipo y arbrito.");
         System.out.println("->0. Salir");
@@ -76,6 +77,13 @@ public class VistaImpl implements Vista {
                 mostrarResultado(partidoDao.obtenerPerdedores());
                 menuInicio();
                 break;
+            case 5:
+                teclado.nextLine();
+                System.out.print("Indique el nombre del Equipo: ");
+                
+                mostrarResultado(partidoDao.obtenerCapitanEquipo(teclado.nextLine()));
+                menuInicio();
+                break;
             case 11:
                 teclado.nextLine();
                 System.out.print("Indique el nombre del Equipo: ");
@@ -94,7 +102,7 @@ public class VistaImpl implements Vista {
                 break;
 
             case 0:
-                System.exit(-1);
+                System.exit(0);
                 break;
             default:
                 System.out.println("El parametro introducido no es valido.");
